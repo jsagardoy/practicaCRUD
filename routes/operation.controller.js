@@ -18,7 +18,7 @@ const operationController = (Operation) =>{
 
     const post = (req,res) => {
                
-        const operation = new Operation(req.body);
+        let operation = new Operation(req.body);
        
         operation.save()
             .then(() =>{
@@ -30,8 +30,12 @@ const operationController = (Operation) =>{
     } 
 
     const put = (req,res) => {
+        
         const reqOperationUpdated = parser.bodyParser(req);
-        reqOperationUpdated.operation.save()
+
+        //console.log(reqOperationUpdated.operation[0]);
+
+        reqOperationUpdated.operation[0].save()
             .then(()=> {
                 res.status(200);
                 res.json(reqOperationUpdated.operation);

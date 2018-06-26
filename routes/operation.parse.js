@@ -11,7 +11,6 @@ exports.queryParser = (req) =>{
 
     return query;
 }
-
 exports.bodyParser = (req) =>{
     let operation = req.operation[0];
 
@@ -90,3 +89,15 @@ exports.bodyParser = (req) =>{
     req.operation[0] = operation;
     return req;
 }
+const copy = (source, destination) =>{
+    for (const key in source) {
+        if (source.hasOwnProperty(key) && !source['_id']) {
+            destination[key] = source[key];
+        }
+    }
+};
+exports.patchParser = (req) =>{
+    copy(req.body, req.operation[0]);
+    return req;
+}
+

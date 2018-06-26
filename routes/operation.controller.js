@@ -33,6 +33,18 @@ const operationController = (Operation) =>{
         
         const reqOperationUpdated = parser.bodyParser(req);
 
+         reqOperationUpdated.operation[0].save()
+            .then(()=> {
+                res.status(200);
+                res.json(reqOperationUpdated.operation);
+            })
+            .catch (handleError);
+    }
+   
+    const patch = (req,res) => {
+        
+        const reqOperationUpdated = parser.patchParser(req);
+
         //console.log(reqOperationUpdated.operation[0]);
 
         reqOperationUpdated.operation[0].save()
@@ -42,12 +54,20 @@ const operationController = (Operation) =>{
             })
             .catch (handleError);
     }
-   
+    const deleteHandler = (req, res) => {
+        req.operation[0].remove()
+            .then (()=>{
+                res.status(204);
+            })
+            .catch(handleError);
+    } 
 
-    return {
+      return {
         get,
         post,
-        put
+        put,
+        patch,
+        deleteHandler
     };
 
 }

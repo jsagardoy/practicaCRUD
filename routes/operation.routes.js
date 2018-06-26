@@ -17,8 +17,8 @@ const routes = (Operation) => {
         operationRouter.route('/:idOperation')
             .get((req,res) => res.json(req.operation))
             .put(operationController.put)
-            /* .patch()
-            .delete() */;
+            .patch(operationController.patch)
+            .delete(operationController.deleteHandler);
     
     return operationRouter;
 }

@@ -1,5 +1,6 @@
 const parser = require ('./operation.parse');
 
+
 const operationController = (Operation) =>{
     
     const handleError = (error) => {
@@ -45,12 +46,13 @@ const operationController = (Operation) =>{
         
         const reqOperationUpdated = parser.patchParser(req);
 
-        //console.log(reqOperationUpdated.operation[0]);
+        console.log(reqOperationUpdated.operation[0]);
 
         reqOperationUpdated.operation[0].save()
             .then(()=> {
+                console.log('Operation Updated');
                 res.status(200);
-                res.json(reqOperationUpdated.operation);
+                res.json(reqOperationUpdated.operation[0]);
             })
             .catch (handleError);
     }
